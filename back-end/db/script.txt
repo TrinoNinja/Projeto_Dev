@@ -1,0 +1,109 @@
+/*
+
+-- DROP TABLE public.users;
+CREATE TABLE public.users (
+	"id" serial4 NOT NULL,
+	"username" varchar NULL,
+	"password" varchar NULL,
+	CONSTRAINT users_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS perfil (
+  id SERIAL PRIMARY KEY,
+  perfil varchar(60) NOT NULL,
+  menu JSON,
+  status_sit SMALLINT NOT NULL DEFAULT 1,
+  status_com SMALLINT NOT NULL DEFAULT 0,
+  UNIQUE (id)
+);
+
+*/
+
+/*
+
+INSERT INTO  users  ( id ,  username ,  password ) VALUES
+( 1, 'edilson', '654321'),
+( 2, 'eliel',   '654321'),
+( 3, 'vieira',  '123456');
+
+
+|perfil_id|perfil     |menu                                                                                                                                                                                                                                                                                                                                                                                                                    |created_at                   |updated_at                   |
+|---------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|-----------------------------|
+|2        |Gerencial  |[{"id":1, "link":"/", "label":"Login", "icon":"mdi-login"},{"id":2, "link":"/home", "label":"Home", "icon":"mdi-home"},{"id":3, "link":"/users", "label":"Usuário", "icon":"mdi-account"},{"id":4, "link":"/contato", "label":"Contato", "icon":"mdi-gmail"},{"id":5, "link":"/sobre", "label":"Sobre", "icon":"mdi-information-outline"}]                                                                              |2024-07-24 01:43:35.334 -0300|2024-07-24 01:43:35.334 -0300|
+|1        |Admin      |[{"id":1,"link":"/","label":"Login","icon":"mdi-login"},{"id":2,"link":"/home","label":"Home","icon":"mdi-home"},{"id":3,"link":"/users","label":"Usuário","icon":"mdi-account"},{"id":4,"link":"/edit_user","label":"Editar Usuário","icon":"mdi-account"},{"id":5,"link":"/contato","label":"Contato","icon":"mdi-gmail"},{"id":6,"link":"/sobre","label":"Sobre","icon":"mdi-information-outline"}]|2024-07-24 01:43:35.334 -0300|2024-07-24 01:43:35.334 -0300|
+|3        |Operacional|[{"id":1,"link":"/","label":"Login","icon":"mdi-login"},{"id":2,"link":"/home","label":"Home","icon":"mdi-home"},{"id":3,"link":"/users","label":"Usuário","icon":"mdi-account"},{"id":4,"link":"/edit_user","label":"Editar Usuário","icon":"mdi-account"},{"id":5,"link":"/contato","label":"Contato","icon":"mdi-gmail"},{"id":6,"link":"/sobre","label":"Sobre","icon":"mdi-information-outline"}]|2024-07-24 01:43:35.334 -0300|2024-07-24 01:43:35.334 -0300|
+
+conteudo do campo menu: 
+    [
+     {"id":1, "link":"/", "label":"Login", "icon":"mdi-login"},
+     {"id":2, "link":"/home", "label":"Home", "icon":"mdi-home"},
+     {"id":3, "link":"/users", "label":"Usuário", "icon":"mdi-account"},
+     {"id":4, "link":"/edit_user", "label":"Editar Usuário", "icon":"mdi-account"},
+     {"id":5, "link":"/contato", "label":"Contato", "icon":"mdi-gmail"},
+     {"id":6, "link":"/sobre", "label":"Sobre", "icon":"mdi-information-outline"}
+    ]
+*/
+
+/*
+CREATE TABLE IF NOT EXISTS permissao (
+  permissao_id SERIAL PRIMARY KEY,
+  pessoa_id INTEGER NOT NULL,
+  pagina_id INTEGER NOT NULL,
+  area_id INTEGER NOT NULL,
+  permissao INTEGER NOT NULL DEFAULT 700,
+  status_sit SMALLINT NOT NULL DEFAULT 1,
+  status_com SMALLINT NOT NULL DEFAULT 0,
+  UNIQUE (pessoa_id, pagina_id, area_id)
+);
+*/
+
+/*
+campo permissao:
+0 : --- (nenhuma permissão)
+1 : --x (somente execução)
+2 : -w- (somente escrita)
+3 : -wx (escrita e execução)
+4 : r-- (somente leitura)
+5 : r-x (leitura e execução)
+6 : rw- (leitura e escrita)
+7 : rwx (leitura, escrita e execução) 
+exemplos:
+777
+755
+744
+700
+*/
+
+/*
+INSERT INTO permissao (permissao_id, pessoa_id, pagina_id, area_id, permissao, status_sit, status_com) VALUES
+(1, 2, 1, 1, 777, 1, 0),
+(2, 2, 1, 1, 755, 1, 0),
+(3, 2, 1, 1, 700, 1, 0),
+(4, 2, 1, 1, 744, 1, 0),
+(5, 2, 1, 1, 777, 1, 0);
+
+-- ################################# 
+
+CREATE TABLE IF NOT EXISTS  pessoa  (
+  pessoa_id  SERIAL PRIMARY KEY,
+  nome  varchar(120) NOT NULL,
+  tipo_id  INTEGER NOT NULL,
+  login  varchar(120) NOT NULL,
+  senha  varchar(255) NOT NULL DEFAULT '31F32F33F',
+  data_cadastro  Timestamp,
+  data_alteracao  Timestamp,
+  cadastrador_id  INTEGER NOT NULL DEFAULT '1',
+  alterador_id  INTEGER DEFAULT NULL,
+  indicador_id  INTEGER DEFAULT NULL,
+  status_sit SMALLINT NOT NULL DEFAULT 1,
+  status_com SMALLINT NOT NULL DEFAULT 0,
+  UNIQUE (pessoa_id, login, tipo_id)
+);
+ 
+
+INSERT INTO  pessoa  ( pessoa_id ,  nome ,  tipo_id ,  login ,  senha ,  data_cadastro ,  data_alteracao ,  cadastrador_id ,  alterador_id ,  indicador_id ,  status_sit ,  status_com ) VALUES
+( 1, 'edilson',    8, 'edilson@grupoconstrusites.com',  '31F32F33F34F35F36F', '2024-07-15 00:00:00', NULL, 1, NULL, NULL, 1, 0),
+( 2, 'eliel',      8, 'eliel@grupoconstrusites.com',    '31F32F33F34F35F36F', '2024-07-15 00:00:00', NULL, 1, NULL, NULL, 1, 0),
+( 3, 'vieira',     8, 'vieira@grupoconstrusites.com',   '31F32F33F34F35F36F', '2024-07-15 00:00:00', NULL, 1, NULL, NULL, 1, 0);
+
+*/
